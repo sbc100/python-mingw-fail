@@ -1,0 +1,24 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [windows-latest]
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v1
+      with:
+        python-version: '2.7'
+    - name: python
+      run: python ./test/test.py
+    - name: python2.7
+      run: python2.7 ./test/test.py
+    - name: python with windows path
+      run: python test\\test.py
+    - name: python2.7 with windows path
+      run: python2.7 test\\test.py
